@@ -1,14 +1,37 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import Project from '../models/Project.js';
 import Task from '../models/Task.js';
 import Risk from '../models/Risk.js';
 import Department from '../models/Department.js';
 import { protect } from '../middleware/auth.js';
 import { computeProjectMetrics } from '../utils/projectMetrics.js';
+import { MOCK_PROJECTS, MOCK_TASKS, MOCK_RISKS, MOCK_DEPARTMENTS } from '../utils/mockData.js';
 
 const router = express.Router();
 
 router.get('/dashboard', protect, async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    const totalProjects = MOCK_PROJECTS.length;
+    const activeProjects = MOCK_PROJECTS.filter((p) => p.status === 'Active').length;
+    const completedProjects = MOCK_PROJECTS.filter((p) => p.status === 'Completed').length;
+    const delayedProjects = MOCK_PROJECTS.filter((p) => p.status === 'Delayed').length;
+    const totalBudget = MOCK_PROJECTS.reduce((s, p) => s + p.totalBudget, 0);
+    const utilizedBudget = MOCK_PROJECTS.reduce((s, p) => s + p.utilizedBudget, 0);
+    const highRiskProjects = MOCK_PROJECTS.filter((p) => ['High', 'Critical'].includes(p.riskLevel)).length;
+
+    return res.json({
+      totalProjects,
+      activeProjects,
+      completedProjects,
+      delayedProjects,
+      totalBudget,
+      utilizedBudget,
+      highRiskProjects,
+      budgetUtilizationPercent: totalBudget ? Math.round((utilizedBudget / totalBudget) * 100) : 0,
+    });
+  }
+
   const [projects, tasks, risks] = await Promise.all([
     Project.find(),
     Task.find(),

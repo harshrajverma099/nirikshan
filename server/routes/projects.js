@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import Project from '../models/Project.js';
 import Budget from '../models/Budget.js';
 import Task from '../models/Task.js';
@@ -8,6 +9,7 @@ import ProjectUpdate from '../models/ProjectUpdate.js';
 import Document from '../models/Document.js';
 import { protect, authorize } from '../middleware/auth.js';
 import { computeProjectMetrics } from '../utils/projectMetrics.js';
+import { MOCK_PROJECTS } from '../utils/mockData.js';
 
 const router = express.Router();
 
@@ -40,6 +42,25 @@ const buildProjectFilter = (req) => {
 };
 
 router.get('/', protect, async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    const enriched = MOCK_PROJECTS.map((p) => ({
+      ...p,
+      metrics: {
+        healthScore: p.status === 'Delayed' ? 48 : 82,
+        healthLabel: p.status === 'Delayed' ? 'Critical' : 'Good',
+        healthColor: p.status === 'Delayed' ? 'rose' : 'emerald',
+        delayPrediction: {
+          prediction: p.status === 'Delayed' ? 'HIGH DELAY RISK' : 'LOW DELAY RISK',
+          riskLevel: p.status === 'Delayed' ? 'HIGH' : 'LOW',
+          estimatedDelayDays: p.status === 'Delayed' ? 45 : 0,
+          reasons: p.status === 'Delayed' ? ['Schedule gap behind baseline', 'Critical path task delayed'] : []
+        },
+        budgetUtilizationPercent: Math.round((p.utilizedBudget / p.totalBudget) * 100)
+      }
+    }));
+    return res.json({ projects: enriched, total: enriched.length, page: 1, pages: 1 });
+  }
+
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 20;
   const filter = buildProjectFilter(req);

@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import { body, validationResult } from 'express-validator';
 import User from '../models/User.js';
 import { generateToken, protect, authorize } from '../middleware/auth.js';
