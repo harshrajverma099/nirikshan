@@ -53,6 +53,10 @@ app.use((err, _, res, __) => {
   res.status(500).json({ message: err.message || 'Internal server error' });
 });
 
-app.listen(PORT, () => {
-  console.log(`NIRIKSHAN API running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`NIRIKSHAN API running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
