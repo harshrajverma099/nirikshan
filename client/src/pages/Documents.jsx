@@ -51,8 +51,9 @@ export default function Documents() {
         <button onClick={() => setShowModal(true)} className="btn-primary text-sm">+ Upload Document</button>
       </div>
       <div className="table-shell">
+        <div className="table-scroll">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50"><tr><th className="p-3 text-left">Name</th><th className="p-3 text-left">Project</th><th className="p-3 text-left">Category</th><th className="p-3 text-left">Uploaded By</th><th className="p-3 text-left">Date</th><th className="p-3 text-left">Actions</th></tr></thead>
+          <thead className="table-head"><tr><th className="p-3 text-left">Name</th><th className="p-3 text-left">Project</th><th className="p-3 text-left">Category</th><th className="p-3 text-left">Uploaded By</th><th className="p-3 text-left">Date</th><th className="p-3 text-left">Actions</th></tr></thead>
           <tbody>{documents.map((d) => (
             <tr key={d._id} className="border-t border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 dark:hover:bg-slate-800/50">
               <td className="p-3 font-medium">{d.name}</td>
@@ -81,6 +82,7 @@ export default function Documents() {
             </tr>
           ))}</tbody>
         </table>
+        </div>
         {documents.length === 0 && <p className="p-8 text-center text-slate-400">No documents uploaded yet</p>}
       </div>
 

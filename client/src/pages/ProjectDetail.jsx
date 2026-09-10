@@ -170,12 +170,14 @@ export default function ProjectDetail() {
 
       {activeTab === 'Tasks' && (
         <div className="table-shell">
+          <div className="table-scroll">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50"><tr><th className="p-3 text-left">Task</th><th className="p-3 text-left">Assigned</th><th className="p-3 text-left">Status</th><th className="p-3 text-left">Priority</th><th className="p-3 text-left">Due</th><th className="p-3 text-left">Progress</th></tr></thead>
+            <thead className="table-head"><tr><th className="p-3 text-left">Task</th><th className="p-3 text-left">Assigned</th><th className="p-3 text-left">Status</th><th className="p-3 text-left">Priority</th><th className="p-3 text-left">Due</th><th className="p-3 text-left">Progress</th></tr></thead>
             <tbody>{tasks.map((t) => (
               <tr key={t._id} className="border-t"><td className="p-3">{t.name}</td><td className="p-3">{t.assignedTo?.name}</td><td className="p-3"><StatusBadge status={t.status} /></td><td className="p-3"><StatusBadge status={t.priority} /></td><td className="p-3">{formatDate(t.dueDate)}</td><td className="p-3 w-24"><ProgressBar value={t.progress} showLabel={false} /></td></tr>
             ))}</tbody>
           </table>
+          </div>
         </div>
       )}
 
@@ -222,8 +224,10 @@ export default function ProjectDetail() {
       {activeTab === 'Documents' && (
         <div className="table-shell">
           {documents.length === 0 ? <p className="p-6 text-slate-400 text-center">No documents uploaded</p> : (
-            <table className="w-full text-sm"><thead className="bg-slate-50"><tr><th className="p-3 text-left">Name</th><th className="p-3 text-left">Category</th><th className="p-3 text-left">Uploaded By</th><th className="p-3 text-left">Date</th></tr></thead>
+            <div className="table-scroll">
+            <table className="w-full text-sm"><thead className="table-head"><tr><th className="p-3 text-left">Name</th><th className="p-3 text-left">Category</th><th className="p-3 text-left">Uploaded By</th><th className="p-3 text-left">Date</th></tr></thead>
             <tbody>{documents.map((d) => <tr key={d._id} className="border-t"><td className="p-3">{d.name}</td><td className="p-3">{d.category}</td><td className="p-3">{d.uploadedBy?.name}</td><td className="p-3">{formatDate(d.createdAt)}</td></tr>)}</tbody></table>
+            </div>
           )}
         </div>
       )}

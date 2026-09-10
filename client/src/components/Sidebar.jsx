@@ -26,49 +26,80 @@ function NavIcon({ d }) {
   );
 }
 
-export default function Sidebar({ collapsed, onToggle }) {
+export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
   const { user } = useAuth();
+  const filteredItems = navItems.filter((item) => !item.roles || item.roles.includes(user?.role));
 
   return (
-    <aside className={`${collapsed ? 'w-[72px]' : 'w-64'} bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white flex flex-col transition-all duration-300 min-h-screen border-r border-slate-800/50 shadow-xl`}>
-      <div className="p-4 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 shadow-glow-dark">N</div>
-          {!collapsed && (
-            <div>
-              <h1 className="font-bold text-sm tracking-wide">NIRIKSHAN</h1>
-              <p className="text-[10px] text-slate-400">Project Monitoring</p>
-            </div>
-          )}
+    <>
+      {mobileOpen && (
+        <button
+          type="button"
+          aria-label="Close menu"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+          onClick={onMobileClose}
+        />
+      )}
+
+      <aside
+        className={`fixed md:static inset-y-0 left-0 z-50 md:z-auto flex flex-col
+          bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white
+          border-r border-slate-800/50 shadow-xl transition-transform duration-300 ease-out
+          w-[min(280px,85vw)] md:w-64
+          ${mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+          ${collapsed ? 'md:w-[72px]' : 'md:w-64'}
+          min-h-screen md:min-h-screen pt-[env(safe-area-inset-top)]`}
+      >
+        <div className="p-4 border-b border-white/10 flex items-center justify-between">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 shadow-glow-dark">N</div>
+            {(!collapsed || mobileOpen) && (
+              <div className="md:block">
+                <h1 className="font-bold text-sm tracking-wide">NIRIKSHAN</h1>
+                <p className="text-[10px] text-slate-400">Project Monitoring</p>
+              </div>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={onMobileClose}
+            className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10"
+            aria-label="Close sidebar"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
-      </div>
-      <nav className="flex-1 py-4 px-2 overflow-y-auto space-y-0.5">
-        {navItems
-          .filter((item) => !item.roles || item.roles.includes(user?.role))
-          .map((item) => (
+
+        <nav className="flex-1 py-4 px-2 overflow-y-auto space-y-0.5 overscroll-contain">
+          {filteredItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
+              onClick={onMobileClose}
               title={collapsed ? item.label : undefined}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 text-sm rounded-xl transition-all duration-200 ${
+                `flex items-center gap-3 px-3 py-3 md:py-2.5 text-sm rounded-xl transition-all duration-200 ${
                   isActive
                     ? 'bg-gradient-to-r from-primary-600/90 to-accent-600/80 text-white shadow-lg shadow-primary-900/30'
-                    : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                    : 'text-slate-400 hover:bg-white/5 hover:text-white active:bg-white/10'
                 }`
               }
             >
               <NavIcon d={item.icon} />
-              {!collapsed && <span className="font-medium">{item.label}</span>}
+              <span className={`font-medium ${collapsed ? 'md:hidden' : ''}`}>{item.label}</span>
             </NavLink>
           ))}
-      </nav>
-      <button
-        onClick={onToggle}
-        className="p-3 mx-2 mb-3 border border-white/10 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 text-xs transition-all"
-      >
-        {collapsed ? '→' : '← Collapse'}
-      </button>
-    </aside>
+        </nav>
+
+        <button
+          onClick={onToggle}
+          className="hidden md:block p-3 mx-2 mb-3 border border-white/10 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 text-xs transition-all"
+        >
+          {collapsed ? '→' : '← Collapse'}
+        </button>
+      </aside>
+    </>
   );
 }

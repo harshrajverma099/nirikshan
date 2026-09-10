@@ -33,7 +33,7 @@ export default function ProjectMap() {
         <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Project Map</h1>
         <p className="text-slate-500 dark:text-slate-400 text-sm">Geographic monitoring — Demo locations across India (fictional data)</p>
       </div>
-      <div className="table-shell" style={{ height: 'calc(100vh - 220px)' }}>
+      <div className="table-shell h-[calc(100dvh-280px)] sm:h-[calc(100dvh-240px)] md:h-[calc(100vh-220px)] min-h-[320px]">
         <MapContainer center={[22.5, 79]} zoom={5} style={{ height: '100%', width: '100%' }}>
           <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {projects.map((p) => (

@@ -31,8 +31,8 @@ export default function Dashboard() {
         <p className="page-subtitle">Integrated project monitoring overview</p>
       </div>
 
-      <div className="card p-6 border-l-4 border-l-primary-500 dark:border-l-primary-400 bg-gradient-to-r from-primary-50/50 to-transparent dark:from-primary-950/20">
-        <div className="grid md:grid-cols-2 gap-6">
+      <div className="card p-4 sm:p-6 border-l-4 border-l-primary-500 dark:border-l-primary-400 bg-gradient-to-r from-primary-50/50 to-transparent dark:from-primary-950/20">
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
             <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Problem</h3>
             <p className="text-sm text-slate-600 dark:text-slate-400">Government projects can suffer from delays, budget overruns and fragmented monitoring across departments.</p>
@@ -44,7 +44,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-2 sm:gap-4">
         <KPICard title="Total Projects" value={kpis.totalProjects} color="blue" />
         <KPICard title="Active" value={kpis.activeProjects} color="green" />
         <KPICard title="Completed" value={kpis.completedProjects} color="purple" />
@@ -54,15 +54,15 @@ export default function Dashboard() {
         <KPICard title="High Risk" value={kpis.highRiskProjects} color="red" />
       </div>
 
-      <div className="card p-6">
-        <div className="flex items-center justify-between mb-5">
+      <div className="card p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
           <div>
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Project Health — Key Innovation</h2>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white">Project Health — Key Innovation</h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Prototype Project Health Algorithm (not an official government formula)</p>
           </div>
-          <Link to="/executive" className="btn-primary text-sm">Executive Overview →</Link>
+          <Link to="/executive" className="btn-primary text-sm w-full sm:w-auto text-center shrink-0">Executive Overview →</Link>
         </div>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {projects.slice(0, 3).map((p) => (
             <Link key={p._id} to={`/projects/${p._id}`} className="card-hover p-5 border border-slate-200 dark:border-slate-700">
               <div className="flex justify-between items-start mb-3">
@@ -86,7 +86,7 @@ export default function Dashboard() {
           <h2 className="font-semibold text-slate-900 dark:text-white">Recent Projects</h2>
           <Link to="/projects" className="text-sm text-primary-600 dark:text-primary-400 hover:underline">View all →</Link>
         </div>
-        <div className="overflow-x-auto">
+        <div className="table-scroll">
           <table className="w-full text-sm">
             <thead className="table-head">
               <tr>

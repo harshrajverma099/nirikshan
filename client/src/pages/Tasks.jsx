@@ -73,8 +73,9 @@ export default function Tasks() {
 
       {view === 'table' ? (
         <div className="table-shell">
+          <div className="table-scroll">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50"><tr><th className="p-3 text-left">Task</th><th className="p-3 text-left">Project</th><th className="p-3 text-left">Assigned</th><th className="p-3 text-left">Status</th><th className="p-3 text-left">Priority</th><th className="p-3 text-left">Due</th><th className="p-3 text-left">Progress</th><th className="p-3 text-left">Actions</th></tr></thead>
+            <thead className="table-head"><tr><th className="p-3 text-left">Task</th><th className="p-3 text-left">Project</th><th className="p-3 text-left">Assigned</th><th className="p-3 text-left">Status</th><th className="p-3 text-left">Priority</th><th className="p-3 text-left">Due</th><th className="p-3 text-left">Progress</th><th className="p-3 text-left">Actions</th></tr></thead>
             <tbody>{tasks.map((t) => (
               <tr key={t._id} className="border-t border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 dark:hover:bg-slate-800/50">
                 <td className="p-3 font-medium">{t.name}</td><td className="p-3">{t.project?.name}</td><td className="p-3">{t.assignedTo?.name}</td>
@@ -88,6 +89,7 @@ export default function Tasks() {
               </tr>
             ))}</tbody>
           </table>
+          </div>
         </div>
       ) : (
         <div className="grid grid-cols-5 gap-4 overflow-x-auto">
@@ -96,7 +98,7 @@ export default function Tasks() {
               <h3 className="font-medium text-sm mb-3 flex justify-between">{col}<span className="text-slate-400">{tasks.filter((t) => t.status === col).length}</span></h3>
               <div className="space-y-2">
                 {tasks.filter((t) => t.status === col).map((t) => (
-                  <div key={t._id} className="bg-slate-50 rounded-lg p-3 text-sm">
+                  <div key={t._id} className="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-3 text-sm border border-slate-100 dark:border-slate-700/50">
                     <p className="font-medium">{t.name}</p>
                     <p className="text-xs text-slate-500">{t.project?.name}</p>
                     <StatusBadge status={t.priority} />

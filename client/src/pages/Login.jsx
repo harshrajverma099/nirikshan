@@ -49,12 +49,12 @@ export default function Login() {
           <p className="text-white/40 text-sm">SIH 2026 — SIH26103 — Web-Based Integrated Project Monitoring</p>
         </div>
       </div>
-      <div className="flex-1 flex items-center justify-center p-8 relative">
-        <div className="absolute top-6 right-6">
-          <ThemeToggle />
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-8 relative">
+        <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+          <ThemeToggle className="scale-90 sm:scale-100" />
         </div>
         <div className="w-full max-w-md animate-slide-up">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-1">Sign In</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-1">Sign In</h2>
           <p className="text-slate-500 dark:text-slate-400 mb-8">Access the project monitoring dashboard</p>
 
           {error && <div className="bg-red-50 dark:bg-red-950/50 text-red-700 dark:text-red-300 p-4 rounded-xl mb-4 text-sm border border-red-200 dark:border-red-800">{error}</div>}

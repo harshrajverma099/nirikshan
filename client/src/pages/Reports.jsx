@@ -101,10 +101,10 @@ ${report.updates.map((u) => `  [${formatDate(u.createdAt)}] ${u.update}`).join('
           </div>
 
           <div className="grid md:grid-cols-4 gap-4">
-            <div className="text-center p-3 bg-slate-50 rounded-lg"><p className="text-xs text-slate-500">Progress</p><p className="text-2xl font-bold">{report.project.progressPercentage}%</p></div>
-            <div className="text-center p-3 bg-slate-50 rounded-lg"><p className="text-xs text-slate-500">Health</p><p className={`text-2xl font-bold ${healthColors(report.metrics.healthScore)}`}>{report.metrics.healthScore}</p></div>
-            <div className="text-center p-3 bg-slate-50 rounded-lg"><p className="text-xs text-slate-500">Budget Used</p><p className="text-2xl font-bold">{report.metrics.budgetUtilization}%</p></div>
-            <div className="text-center p-3 bg-slate-50 rounded-lg"><p className="text-xs text-slate-500">Delay Risk</p><p className="text-sm font-bold mt-2">{report.metrics.delayPrediction.prediction}</p></div>
+            <div className="text-center p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50"><p className="text-xs text-slate-500 dark:text-slate-400">Progress</p><p className="text-2xl font-bold text-slate-900 dark:text-white">{report.project.progressPercentage}%</p></div>
+            <div className="text-center p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50"><p className="text-xs text-slate-500 dark:text-slate-400">Health</p><p className={`text-2xl font-bold ${healthColors(report.metrics.healthScore)}`}>{report.metrics.healthScore}</p></div>
+            <div className="text-center p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50"><p className="text-xs text-slate-500 dark:text-slate-400">Budget Used</p><p className="text-2xl font-bold text-slate-900 dark:text-white">{report.metrics.budgetUtilization}%</p></div>
+            <div className="text-center p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50"><p className="text-xs text-slate-500 dark:text-slate-400">Delay Risk</p><p className="text-sm font-bold mt-2 text-slate-900 dark:text-white">{report.metrics.delayPrediction.prediction}</p></div>
           </div>
 
           <div><h3 className="font-semibold mb-2">Project Details</h3>

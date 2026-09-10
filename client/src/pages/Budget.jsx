@@ -55,8 +55,9 @@ export default function BudgetPage() {
       </div>
 
       <div className="table-shell">
+        <div className="table-scroll">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50"><tr><th className="p-3 text-left">Project</th><th className="p-3 text-left">Approved</th><th className="p-3 text-left">Utilized</th><th className="p-3 text-left">Remaining</th><th className="p-3 text-left">Utilization</th><th className="p-3 text-left">Warning</th></tr></thead>
+          <thead className="table-head"><tr><th className="p-3 text-left">Project</th><th className="p-3 text-left">Approved</th><th className="p-3 text-left">Utilized</th><th className="p-3 text-left">Remaining</th><th className="p-3 text-left">Utilization</th><th className="p-3 text-left">Warning</th></tr></thead>
           <tbody>{budgets.map((b) => {
             const warn = b.utilizationPercentage > (b.project?.progressPercentage || 0) + 10;
             return (
@@ -71,6 +72,7 @@ export default function BudgetPage() {
             );
           })}</tbody>
         </table>
+        </div>
       </div>
     </div>
   );

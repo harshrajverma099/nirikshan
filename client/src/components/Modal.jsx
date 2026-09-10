@@ -2,7 +2,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' })
   if (!isOpen) return null;
   const sizes = { sm: 'max-w-md', md: 'max-w-lg', lg: 'max-w-2xl', xl: 'max-w-4xl' };
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-3 sm:p-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] animate-fade-in">
       <div className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm" onClick={onClose} />
       <div className={`relative card shadow-2xl w-full ${sizes[size]} max-h-[90vh] overflow-y-auto animate-slide-up dark:shadow-glow-dark`}>
         <div className="flex items-center justify-between p-5 border-b border-slate-100 dark:border-slate-700">

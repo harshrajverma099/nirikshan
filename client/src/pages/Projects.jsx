@@ -58,38 +58,39 @@ export default function Projects() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="page-actions">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Projects</h1>
-          <p className="text-slate-500 dark:text-slate-400 text-sm">{projects.length} projects found</p>
+          <h1 className="page-title">Projects</h1>
+          <p className="page-subtitle">{projects.length} projects found</p>
         </div>
         {canCreateProjects(user?.role) && (
-          <button onClick={() => setShowModal(true)} className="btn-primary">+ New Project</button>
+          <button onClick={() => setShowModal(true)} className="btn-primary w-full sm:w-auto shrink-0">+ New Project</button>
         )}
       </div>
 
-      <div className="card p-4 flex flex-wrap gap-3">
-        <input placeholder="Search..." className="input-field max-w-xs text-sm" value={filters.search}
+      <div className="filter-bar">
+        <input placeholder="Search..." className="input-field sm:max-w-xs text-sm" value={filters.search}
           onChange={(e) => setFilters({ ...filters, search: e.target.value })} />
-        <select className="input-field max-w-[150px] text-sm" value={filters.status} onChange={(e) => setFilters({ ...filters, status: e.target.value })}>
+        <select className="input-field text-sm" value={filters.status} onChange={(e) => setFilters({ ...filters, status: e.target.value })}>
           <option value="">All Status</option>
           {['Planning', 'Active', 'On Hold', 'Delayed', 'Completed', 'Cancelled'].map((s) => <option key={s}>{s}</option>)}
         </select>
-        <select className="input-field max-w-[150px] text-sm" value={filters.risk} onChange={(e) => setFilters({ ...filters, risk: e.target.value })}>
+        <select className="input-field text-sm" value={filters.risk} onChange={(e) => setFilters({ ...filters, risk: e.target.value })}>
           <option value="">All Risk</option>
           {['Low', 'Medium', 'High', 'Critical'].map((s) => <option key={s}>{s}</option>)}
         </select>
-        <select className="input-field max-w-[150px] text-sm" value={filters.priority} onChange={(e) => setFilters({ ...filters, priority: e.target.value })}>
+        <select className="input-field text-sm" value={filters.priority} onChange={(e) => setFilters({ ...filters, priority: e.target.value })}>
           <option value="">All Priority</option>
           {['Low', 'Medium', 'High', 'Critical'].map((s) => <option key={s}>{s}</option>)}
         </select>
-        <select className="input-field max-w-[180px] text-sm" value={filters.department} onChange={(e) => setFilters({ ...filters, department: e.target.value })}>
+        <select className="input-field sm:max-w-[180px] text-sm" value={filters.department} onChange={(e) => setFilters({ ...filters, department: e.target.value })}>
           <option value="">All Departments</option>
           {departments.map((d) => <option key={d._id} value={d._id}>{d.name}</option>)}
         </select>
       </div>
 
       <div className="table-shell">
+        <div className="table-scroll">
         <table className="w-full text-sm">
           <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400">
             <tr>
@@ -126,11 +127,12 @@ export default function Projects() {
           </tbody>
         </table>
         {projects.length === 0 && <p className="p-8 text-center text-slate-400">No projects found</p>}
+        </div>
       </div>
 
       <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="Create New Project" size="lg">
         <form onSubmit={handleCreate} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="col-span-2"><label className="text-sm font-medium">Project Name</label><input className="input-field" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></div>
             <div><label className="text-sm font-medium">Department</label>
               <select className="input-field" required value={form.department} onChange={(e) => setForm({ ...form, department: e.target.value })}>

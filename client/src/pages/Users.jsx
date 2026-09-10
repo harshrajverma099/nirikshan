@@ -43,8 +43,9 @@ export default function Users() {
         <button onClick={() => setShowModal(true)} className="btn-primary text-sm">+ Create User</button>
       </div>
       <div className="table-shell">
+        <div className="table-scroll">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50"><tr><th className="p-3 text-left">Name</th><th className="p-3 text-left">Email</th><th className="p-3 text-left">Role</th><th className="p-3 text-left">Department</th><th className="p-3 text-left">Status</th></tr></thead>
+          <thead className="table-head"><tr><th className="p-3 text-left">Name</th><th className="p-3 text-left">Email</th><th className="p-3 text-left">Role</th><th className="p-3 text-left">Department</th><th className="p-3 text-left">Status</th></tr></thead>
           <tbody>{users.map((u) => (
             <tr key={u._id} className="border-t border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 dark:hover:bg-slate-800/50">
               <td className="p-3 font-medium">{u.name} {u.isDemo && <span className="text-xs text-amber-600">DEMO</span>}</td>
@@ -55,6 +56,7 @@ export default function Users() {
             </tr>
           ))}</tbody>
         </table>
+        </div>
       </div>
 
       <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="Create User">

@@ -5,19 +5,28 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-slate-50 text-slate-800 antialiased font-sans transition-colors duration-300;
   }
   html.dark body {
     @apply bg-slate-950 text-slate-100;
   }
+  ::selection {
+    @apply bg-primary-500/20 text-primary-900 dark:text-primary-100;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-600 to-accent-600 text-white px-4 py-2.5 rounded-xl
-      hover:from-primary-700 hover:to-accent-500 transition-all duration-200 font-medium
+    @apply text-white px-4 py-2.5 rounded-xl transition-all duration-200 font-medium
       shadow-sm hover:shadow-md disabled:opacity-50 active:scale-[0.98];
+    background-image: linear-gradient(to right, #2563eb, #4f46e5);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-image: linear-gradient(to right, #1d4ed8, #6366f1);
   }
   .btn-secondary {
     @apply bg-white border border-slate-200 text-slate-700 px-4 py-2.5 rounded-xl
@@ -45,13 +54,30 @@
     @apply mb-6 animate-slide-up;
   }
   .page-title {
-    @apply text-2xl font-bold text-slate-900 dark:text-white tracking-tight;
+    @apply text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight;
   }
   .page-subtitle {
     @apply text-slate-500 dark:text-slate-400 text-sm mt-0.5;
   }
   .table-shell {
     @apply card overflow-hidden;
+  }
+  .table-scroll {
+    @apply overflow-x-auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table-scroll table {
+    @apply min-w-[640px];
+  }
+  .page-actions {
+    @apply flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between;
+  }
+  .filter-bar {
+    @apply card p-3 sm:p-4 flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-3;
+  }
+  .filter-bar .input-field,
+  .filter-bar select {
+    @apply w-full sm:max-w-[150px] sm:w-auto text-sm;
   }
   .table-head {
     @apply bg-slate-50/80 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider;
