@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased font-sans transition-colors duration-300;
+  }
+  html.dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-accent-600 text-white px-4 py-2.5 rounded-xl
+      hover:from-primary-700 hover:to-accent-500 transition-all duration-200 font-medium
+      shadow-sm hover:shadow-md disabled:opacity-50 active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply bg-white border border-slate-200 text-slate-700 px-4 py-2.5 rounded-xl
+      hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 font-medium
+      dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-700 active:scale-[0.98];
+  }
+  .card {
+    @apply bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-soft
+      dark:bg-slate-800/60 dark:border-slate-700/60 dark:shadow-none transition-colors duration-300;
+  }
+  .card-hover {
+    @apply card hover:shadow-lg hover:border-blue-200 dark:hover:border-primary-800 transition-all duration-200;
+  }
+  .input-field {
+    @apply w-full border border-slate-200 rounded-xl px-4 py-2.5 bg-white/50
+      focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500
+      transition-all duration-200 placeholder:text-slate-400
+      dark:bg-slate-900/50 dark:border-slate-700 dark:text-slate-100 dark:placeholder:text-slate-500
+      dark:focus:ring-primary-400/30 dark:focus:border-primary-500;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+  .page-header {
+    @apply mb-6 animate-slide-up;
+  }
+  .page-title {
+    @apply text-2xl font-bold text-slate-900 dark:text-white tracking-tight;
+  }
+  .page-subtitle {
+    @apply text-slate-500 dark:text-slate-400 text-sm mt-0.5;
+  }
+  .table-shell {
+    @apply card overflow-hidden;
+  }
+  .table-head {
+    @apply bg-slate-50/80 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider;
+  }
+  .table-row {
+    @apply border-t border-slate-100 dark:border-slate-700/50 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors;
+  }
+  .glass-panel {
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-slate-700/50;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent;
+  }
+  .main-bg {
+    @apply bg-gradient-to-br from-slate-50 via-white to-blue-50/30
+      dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/30 min-h-full transition-colors duration-300;
+  }
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { @apply bg-transparent; }
+::-webkit-scrollbar-thumb { @apply bg-slate-300 dark:bg-slate-600 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-slate-400 dark:bg-slate-500; }

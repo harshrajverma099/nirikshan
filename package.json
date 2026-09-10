@@ -1,0 +1,17 @@
+{
+  "name": "nirikshan",
+  "version": "1.0.0",
+  "description": "NIRIKSHAN - Intelligent Project Monitoring & Risk Management Platform (SIH 2026 Prototype)",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
